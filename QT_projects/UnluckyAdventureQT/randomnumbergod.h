@@ -1,11 +1,18 @@
-#ifndef RANDOMNUMBERGOD_H
-#define RANDOMNUMBERGOD_H
+#ifndef UNLUCKYADVENTURE_RANDOMNUMBERGOD_H
+#define UNLUCKYADVENTURE_RANDOMNUMBERGOD_H
 
 
-class RandomNumberGod
-{
+class RandomNumberGod {
+private:
+    double percentage=0;
 public:
+    RandomNumberGod(double percentage);
     RandomNumberGod();
+    bool roll();
+    bool roll(double percentage);
+    int number_int(int min, int max);
+    double number_double(double min, double max);
 };
 
-#endif // RANDOMNUMBERGOD_H
+
+#endif //UNLUCKYADVENTURE_RANDOMNUMBERGOD_H
