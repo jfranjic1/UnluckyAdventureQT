@@ -2,15 +2,17 @@
 #include "field.h"
 #include "randomnumbergod.h"
 #include <QGraphicsRectItem>
-
+#include <QDebug>
 Field::Field(){
-    RandomNumberGod black_hole_perc(1);
+    RandomNumberGod black_hole_perc(2);
     RandomNumberGod wormhole_perc(5);
     RandomNumberGod forward_perc(9);
     RandomNumberGod backward_perc(10);
 
     if(black_hole_perc.roll()){
+
         this->blackhole_field=true;
+
         return;
     }
 

@@ -1,18 +1,19 @@
 #include "randomnumbergod.h"
-#include "random"
+#include <random>
+#include <QDebug>
+#include <QRandomGenerator>
 
 bool RandomNumberGod::roll() {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_real_distribution<double> dist_blackhole(0, 100);
-    return dist_blackhole(mt)<percentage;
+
+        std::uniform_int_distribution<> dist(0, 100);
+        int value = dist(*QRandomGenerator::global());
+        return value<percentage;
 }
 
 bool RandomNumberGod::roll(double percentage) {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_real_distribution<double> dist_blackhole(0, 100);
-    return dist_blackhole(mt)<percentage;
+    std::uniform_int_distribution<> dist(0, 100);
+    int value = dist(*QRandomGenerator::global());
+    return value<percentage;
 }
 
 RandomNumberGod::RandomNumberGod(double percentage) : percentage(percentage) {}
@@ -22,15 +23,13 @@ RandomNumberGod::RandomNumberGod() {
 }
 
 int RandomNumberGod::number_int(int min, int max) {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist_blackhole(min, max);
-    return dist_blackhole(mt);
+    std::uniform_int_distribution<> dist(min, max);
+    int value = dist(*QRandomGenerator::global());
+    return value;
 }
 
 double RandomNumberGod::number_double(double min, double max) {
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_real_distribution<double> dist_blackhole(min, max);
-    return dist_blackhole(mt);
+    std::uniform_real_distribution<> dist(min, max);
+    double value = dist(*QRandomGenerator::global());
+    return value;
 }

@@ -1,34 +1,66 @@
 #include <iostream>
 #include "game.h"
 #include "randomnumbergod.h"
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+#include <QDebug>
 //#include "Shop.h"
-Game::Game(int players, int numberOfFields, int diceSides) {
+Game::Game(int players) {
+    this->scene = new QGraphicsScene();
+    this->view = new QGraphicsView();
+    this->view->setScene(this->scene);
     this->num_of_players = players;
+    this->fields=std::vector<Field*>(95);
+
     //this->players = std::vector<Player*>(players);
-    this->fields = std::vector<Field*>(numberOfFields);
+    //this->fields = std::vector<Field*>(numberOfFields);
     //this->dice = Dice(diceSides);
     for(int i=0;i<players;i++){
         //this->players[i] = new Player(i+1);
     }
-    for(int i=0;i<numberOfFields;i++){
+    int startx=0;
+    int starty=0;
+    int widthRec=40;
+    for(int i=0;i<95;i++){
         this->fields[i] = new Field();
+        if(this->fields[i]->isBlackholeField()&& i !=0 )this->fields[i]->setBrush(Qt::black);
+        this->fields[i]->setRect(startx,starty,widthRec,widthRec);
+        this->scene->addItem(fields[i]);
+
+        if(i>=0&&i<32){
+            startx+=widthRec;
+        }
+        if(i>=32&&i<47){
+            starty+=widthRec;
+        }
+        if(i>=47&&i<79){
+            startx-=widthRec;
+        }
+        if(i>79&&i<=94){
+            starty-=widthRec;
+
+        }
+
     }
+
+    this->view->show();
     this->fields[0]->NormalField();
 }
 
-/*Game::~Game() {
+Game::~Game() {
     for (int i = 0; i < num_of_players ; i++) {
-        delete this->players[i];
+       // delete this->players[i];
     }
     for (int i = 0; i < this->fields.size() ; i++) {
-        delete this->fields[i];
+       delete this->fields[i];
     }
     for (int i = 1; i < this->fields.size(); ++i) {
         if (this->fields[i]->isMonsterField()){
-            delete fields[i]->getMonster();
+            //delete fields[i]->getMonster();
         }
     }
-}*/
+}
 
 /*void Game::turn() {
     bool check=true;
@@ -125,6 +157,7 @@ Game::Game(int players, int numberOfFields, int diceSides) {
     }
 }
 */
+/*
 void Game::start() {
     std::cout<<"What is the number of great adventurers ?"<<std::endl;
     int num;
@@ -161,7 +194,7 @@ void Game::start() {
     } while (monst != 'y' && monst != 'Y' && monst != 'N' && monst != 'n');
     if (monst == 'y' || monst == 'Y')g.generateMonsters();
 
-    /*
+
         int monster = 0, black = 0, worm = 0, forward = 0, backward = 0;
         for (int i = 0; i < 100000; ++i) {
             if (g.fields[i]->isMonsterField())monster++;
@@ -175,7 +208,7 @@ void Game::start() {
         std::cout << "Forward " << forward << std::endl;
         std::cout << "Worm " << worm << std::endl;
         std::cout << "Black " << black << std::endl;
-    */
+
 
     while(1){
         try {
@@ -191,7 +224,7 @@ void Game::generateMonsters() {
     for (int i = 1; i < this->fields.size(); ++i) {
         this->fields[i]->GenerateMonsters();
     }
-}
+}*/
 /*
 void Game::monsterCombat(int i, int j) {
     std::vector<float> run = {70, 50, 30, 20};
